@@ -40,7 +40,7 @@ def feature_preprocessing(datafile):
 
     return X, y
 
-def feature_scaling_train(X, dim_string):
+def feature_scaling_train(X, dim_string, scaler_path):
     scaler = preprocessing.StandardScaler()
     scaler.fit(X)
     pickle.dump(scaler,open(path.join(scaler_path,'feature_scaler_'+dim_string+'.pkl'),'wb'))
@@ -48,13 +48,13 @@ def feature_scaling_train(X, dim_string):
 
     return
 
-def feature_scaling_test(X, dim_string):
+def feature_scaling_test(X, dim_string, scaler_path):
     scaler = pickle.load(open(path.join(scaler_path,'feature_scaler_'+dim_string+'.pkl'),'r'))
     X = scaler.transform(X)
 
     return X
 
-def buildEstimators(mode, dim_string, best_params):
+def buildEstimators(mode, dim_string, best_params, classifier_path):
     if mode == 'train' or mode == 'cv':
         # best parameters got by gridsearchCV, best score: 1
         estimators = [('anova_filter', SelectKBest(f_classif, k=best_params['anova_filter__k'])),
@@ -174,9 +174,9 @@ if __name__ == "__main__":
     X[numpy.isinf(X)] = numpy.iinfo('i').max
 
     if mode == 'train' or mode == 'cv':
-        feature_scaling_train(X,dim_string)
+        feature_scaling_train(X,dim_string,scaler_path)
 
-    X = feature_scaling_test(X,dim_string)
+    X = feature_scaling_test(X,dim_string,scaler_path)
 
     if mode == 'train' or mode == 'cv':
         X,y,imputer,le = imputerLabelEncoder_train(X,y)
@@ -185,11 +185,11 @@ if __name__ == "__main__":
 
     # print X,y
     best_params = {'xgb__learning_rate': 0.1, 'xgb__n_estimators': 500, 'xgb__max_depth': 5, 'anova_filter__k': 'all'}
-    clf = buildEstimators(mode, dim_string, best_params)
+    clf = buildEstimators(mode, dim_string, best_params, classifier_path)
     if mode == 'cv' or mode == 'train':
 
         best_params = grid_search(clf,X,y)
-        clf = buildEstimators(mode, dim_string, best_params)
+        clf = buildEstimators(mode, dim_string, best_params, classifier_path)
         train_save(clf, X, y, le, imputer,dim_string)
     elif mode == 'test':
         prediction(clf, X, y)

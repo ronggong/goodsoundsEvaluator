@@ -38,7 +38,12 @@ def getMFCCBands2D(audio, framesize):
 
     return feature
 
-# def trainingDataPreparation(audio, framesize, )
+def log_mel_feature(full_path_fn):
+    audio               = ess.MonoLoader(downmix = 'left', filename = full_path_fn, sampleRate = fs)()
+    feature             = getMFCCBands2D(audio, framesize)
+    feature             = np.log(100000 * feature + 1)
+    return feature
+
 
 if __name__ == '__main__':
 

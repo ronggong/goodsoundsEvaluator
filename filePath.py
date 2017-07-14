@@ -16,3 +16,8 @@ import os
 dir_path = os.path.dirname(os.path.realpath(__file__))
 scaler_path = join(dir_path,'./baseline/models')
 classifier_path = join(dir_path,'./baseline/models')
+
+scaler_framelevel_path = join(dir_path,'./baseline/models_framelevel')
+
+# use i-vectors calculated by frame level features
+classifer_framelevel_path = join(dir_path,'./baseline/models_framelevel')

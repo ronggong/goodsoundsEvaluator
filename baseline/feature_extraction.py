@@ -263,7 +263,7 @@ def removeSilence(audio,sampleRate,lineList):
     return audio_remove_silence
 
 def extract_for_one(wavDataDir, filename):
-    filename_wav                 = os.path.join(wavDataDir,filename)
+    filename_wav = os.path.join(wavDataDir,filename)
 
     ##-- process the silence removed audio
     loader = essentia.streaming.EqloudLoader(filename=filename_wav)
@@ -284,7 +284,7 @@ def extract_for_one(wavDataDir, filename):
     stats = ['mean', 'var', 'dmean', 'dvar']
     statsPool = essentia.standard.PoolAggregator(defaultStats=stats)(p)
 
-    return statsPool
+    return statsPool, p
 
 def convert_pool_to_dataframe(essentia_pool, filename):
     pool_dict = dict()
@@ -318,7 +318,7 @@ if __name__ == '__main__':
             print(fn)
             print(ii_fn, len(label_oriol))
 
-            pool = extract_for_one(path_dataset, fn)
+            pool, _ = extract_for_one(path_dataset, fn)
             feature_set = feature_set.append(convert_pool_to_dataframe(pool, fn))
 
         feature_set.to_csv(outfile)
