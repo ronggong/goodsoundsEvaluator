@@ -4,9 +4,6 @@ import essentia.standard as ess
 from essentia.streaming import *
 import numpy
 import pandas as pd
-from scipy.io import wavfile,savemat
-
-
 from filePath import *
 from utilsFunctions import hz2cents
 
@@ -233,6 +230,9 @@ def getLineList(wavDataDir,lineList,filename):
     :param lineList: [start_time_line, end_time_line, syllables_line]
     :return: [[start_time, end_time, 'non_silence'],[start_time, end_time, ''], ...], silence part is an empty string
     '''
+
+    from scipy.io import wavfile, savemat
+
     filename_wav = os.path.join(wavDataDir,filename+FILE_EXT_WAV)
 
     dict_mat = {'filename_wav':filename_wav,'lineList':lineList}
