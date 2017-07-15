@@ -29,7 +29,7 @@ Keras>1.2.1
 Theano>0.8.2  
 h5py>2.7.0  
 pandas>0.17.0  
-xgboost==0.6
+xgboost==0.6  
 numpy  
 Essentia 2.1-beta3  
 scikit-learn==0.18.1
