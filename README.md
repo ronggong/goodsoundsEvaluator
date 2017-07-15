@@ -10,7 +10,7 @@ To run the pre-trained Keras models, please refer to `demo_CNNs_models.ipynb`
 | Pitch stability   | 0.9415162455 |
 | Dynamic stability | 0.9682310469 |
 | Timbre richness   | 0.9321299639 |
-| attack clarity    | 0.9602888087 |
+| Attack clarity    | 0.9602888087 |
 
 To run the pre-trained XGBoost models, please refer to `demo_xgboost_models.ipynb`
 
@@ -20,7 +20,7 @@ To run the pre-trained XGBoost models, please refer to `demo_xgboost_models.ipyn
 | Pitch stability   | 0.9364620939 |
 | Dynamic stability | 0.9227436823 |
 | Timbre richness   | 0.9487364621 |
-| attack clarity    | 0.9422382671 |
+| Attack clarity    | 0.9422382671 |
 
 The running speed of each models is indicated in each `ipynb`.
 
@@ -28,7 +28,7 @@ The running speed of each models is indicated in each `ipynb`.
 Keras>1.2.1  
 Theano>0.8.2  
 h5py>2.7.0  
-pandas>0.17.0
+pandas>0.17.0  
 xgboost==0.6
 numpy  
 Essentia 2.1-beta3  
